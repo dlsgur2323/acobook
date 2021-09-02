@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 모바일용웹 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- 안드로이드 홈화면추가시 상단 주소창 제거 -->
@@ -94,6 +93,7 @@
             position: fixed;
         }
         </style>
+        
 </head>
 <body>
     <div id="app">
@@ -101,7 +101,7 @@
             <h2 class="pageTitle">예산 관리(달력)</h2>
         </div>
         <div id="pageBody">
-            <p style="margin-top:0;margin-bottom: 8%;text-align: center;color:#EEEEEE;">업데이트 중입니다</p>
+            <p id="updt" style="margin-top:0;margin-bottom: 8%;text-align: center;color:#EEEEEE;">업데이트 중입니다</p>
             <div id="monthInfo" class="blueBox brd-t brd-b">
                 <div class="float-l" style="width:32%;height:100%;text-align: center;color:#EEEEEE;">
                     <div class="brd-r" style="height: 52%;margin-top: 16%;width: 100%;padding-right: 10%;">
@@ -126,7 +126,9 @@
                         <h1 style="font-size: 235%;">&gt;</h1>
                     </div>
                     <div>
-
+                        <p id="test2"></p>
+                        <p id="test3"></p>
+                        <p id="test">0</p>
                     </div>
                     <div style="    width: 50px;
                     height: 50px;
@@ -144,5 +146,36 @@
 
         </div>
     </div>
+
+    <script>
+        var pageBody = document.getElementById('pageBody');
+
+        var startY = 0;
+        var touching = false;
+        var touchMoving = false;
+        document.addEventListener('touchstart', function(e){
+            touching = true;
+            startY = e.touches[0].screenY;
+            setTimeout(()=>{
+                if(!touchMoving){
+                    touching = false;
+                }
+            } ,500);
+        });
+        
+        document.addEventListener('touchmove', function(e){
+            if(touching){
+                var currentY = e.touches[0].screenY;
+                touchMoving = true;
+                if(currentY >= 70){
+                    window.location.reload();
+                }
+            }
+        });
+        document.addEventListener('touchend', function(e){
+            touching = false;
+            touchMoving = false;
+        });
+        </script>
 </body>
 </html>
